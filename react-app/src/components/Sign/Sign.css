@@ -1,0 +1,32 @@
+@keyframes signWiggle {
+    0%, 100% { rotate: -1.5deg; }
+    50% { rotate: 1.5deg; }
+}
+
+.sign {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform .2s ease;
+    cursor: pointer;
+}
+
+.sign-img {
+    width: 120pt;
+    max-width: 34vw;
+    filter: drop-shadow(0 6pt 8pt var(--ac-shadow-soft));
+}
+
+.sign:hover {
+    transform: translateY(-4pt) scale(1.06);
+}
+
+.sign:hover .sign-img {
+    animation: signWiggle .5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sign:hover .sign-img {
+        animation: none;
+    }
+}

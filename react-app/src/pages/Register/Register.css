@@ -1,0 +1,96 @@
+.register-wrap {
+    max-width: 720pt;
+}
+
+.teammate-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 10pt;
+    align-items: start;
+}
+
+.teammate-remove {
+    margin-top: 26pt;
+    width: 30pt;
+    height: 30pt;
+    border-radius: 100pt;
+    background: var(--ac-cream-dark);
+    border: 1.5px solid transparent;
+    color: var(--ac-text);
+    font-size: 16pt;
+    line-height: 1;
+    cursor: pointer;
+    transition: .15s ease;
+}
+
+.teammate-remove:hover {
+    background: var(--ac-red);
+    color: white;
+    border-color: var(--ac-red-dark);
+}
+
+.add-teammate-btn {
+    padding: 9pt 20pt;
+    font-size: 10.5pt;
+    margin-bottom: 8pt;
+}
+
+.discord-reminder {
+    background: var(--ac-cream-dark);
+    border: 2px dashed rgba(30, 42, 69, 0.25);
+    border-radius: 12pt;
+    padding: 10pt 14pt;
+    font-size: 10pt;
+    margin: 4pt 0 18pt;
+}
+
+.discord-reminder a {
+    color: var(--ac-blue-dark);
+    font-family: var(--font-heading);
+}
+
+.register-submit-error {
+    margin-bottom: 16pt;
+}
+
+.register-submit {
+    display: block;
+    width: 100%;
+    font-size: 15pt;
+    padding: 15pt;
+    margin-top: 6pt;
+}
+
+.register-submit:disabled {
+    opacity: .7;
+    cursor: default;
+}
+
+.register-success {
+    display: flex;
+    justify-content: center;
+    padding-top: 80pt;
+    padding-bottom: 100pt;
+}
+
+.register-success-card {
+    max-width: 420pt;
+    padding: 40pt 36pt;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10pt;
+}
+
+@media (max-width: 700px) {
+    .teammate-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .teammate-remove {
+        grid-column: 1 / -1;
+        justify-self: end;
+        margin-top: -4pt;
+    }
+}

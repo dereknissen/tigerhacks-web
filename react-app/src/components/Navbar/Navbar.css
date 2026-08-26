@@ -1,0 +1,139 @@
+#navbar-wrap {
+    position: sticky;
+    top: 14pt;
+    z-index: 50;
+    padding: 0 16pt;
+}
+
+#navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8pt 12pt 8pt 8pt;
+    max-width: 1180px;
+    margin: 0 auto;
+    background: var(--ac-paper);
+    border-radius: 100pt;
+    box-shadow: 0 4pt 18pt var(--ac-shadow-soft);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10pt;
+}
+
+.nav-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    background: var(--ac-cream);
+    border-radius: 100pt;
+    padding: 3pt;
+}
+
+.nav-brand-text {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--ac-text);
+    font-size: 14pt;
+    letter-spacing: .3pt;
+}
+
+.nav-links {
+    display: flex;
+    gap: 8pt;
+}
+
+.nav-link {
+    color: var(--ac-text);
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 11pt;
+    height: min-content;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 8pt 16pt;
+    border-radius: 100pt;
+    transition: .2s;
+}
+
+.nav-link:hover {
+    background: var(--ac-cream);
+    scale: 1.04;
+}
+
+.nav-register {
+    padding: 9pt 22pt;
+    font-size: 11pt;
+}
+
+.nav-burger {
+    width: 40pt;
+    height: 40pt;
+    border-radius: 100pt;
+    border: none;
+    background: var(--ac-cream);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5pt;
+    cursor: pointer;
+}
+
+.nav-burger span {
+    width: 18pt;
+    height: 2.5pt;
+    background: var(--ac-text);
+    border-radius: 4pt;
+    transition: .2s;
+}
+
+.nav-burger-open span:nth-child(1) { transform: translateY(7.5pt) rotate(45deg); }
+.nav-burger-open span:nth-child(2) { opacity: 0; }
+.nav-burger-open span:nth-child(3) { transform: translateY(-7.5pt) rotate(-45deg); }
+
+.nav-mobile-menu {
+    max-width: 1180px;
+    margin: 10pt auto 0;
+    padding: 16pt;
+    display: flex;
+    flex-direction: column;
+    gap: 4pt;
+}
+
+.nav-mobile-menu .nav-link {
+    color: var(--ac-text);
+    text-align: center;
+}
+
+.nav-mobile-menu .btn {
+    margin-top: 8pt;
+}
+
+/* ---------- night mode (Landing page hero toggle) ---------- */
+
+#navbar.nav-dark {
+    background: var(--ac-text);
+    box-shadow: 0 4pt 18pt rgba(0, 0, 0, 0.4);
+}
+
+.nav-dark .nav-logo {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-dark .nav-brand-text,
+.nav-dark .nav-link {
+    color: var(--ac-cream);
+}
+
+.nav-dark .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-mobile-menu.nav-dark {
+    background-color: var(--ac-text);
+    background-image: none;
+    border-color: rgba(255, 255, 255, 0.15);
+}

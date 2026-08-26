@@ -1,0 +1,74 @@
+.signpost {
+    position: absolute;
+    z-index: 3;
+    /* anchored relative to the hero-sky's own center so it lines up with
+       the centered 1180px .hero-content box (590px half-width + a
+       ~24px content inset + a gap), with extra clearance for the
+       right-pointing signs (About/Tracks), which overhang well past
+       the pole itself and would otherwise collide with hero-socials. */
+    right: calc(50% + 630px);
+    bottom: 28pt;
+    height: 158pt;
+    pointer-events: none;
+    display: none;
+}
+
+/* only shows once there's guaranteed room in the gutter beside the
+   centered hero card — see the matching right offset above. */
+@media (min-width: 1600px) {
+    .signpost {
+        display: block;
+    }
+}
+
+.signpost-pole {
+    height: 100%;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 6pt 6pt var(--ac-shadow-soft));
+}
+
+.signpost-mount {
+    position: absolute;
+    width: 60pt;
+    transform: translateY(-50%);
+}
+
+.signpost-mount-right {
+    left: 46%;
+}
+
+.signpost-mount-left {
+    right: 46%;
+}
+
+@keyframes signBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3pt); }
+}
+
+.signpost-sign-bob {
+    animation: signBob 3.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .signpost-sign-bob {
+        animation: none;
+    }
+}
+
+.signpost-sign {
+    display: block;
+    pointer-events: auto;
+    transition: transform .2s ease;
+}
+
+.signpost-sign:hover {
+    transform: scale(1.08);
+}
+
+.signpost-sign img {
+    width: 100%;
+    display: block;
+    filter: drop-shadow(0 4pt 4pt var(--ac-shadow-soft));
+}

@@ -1,0 +1,45 @@
+.tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20pt;
+    max-width: 760pt;
+    margin: 0 auto;
+}
+
+.track-card {
+    padding: 22pt 18pt;
+    border-top: 8pt solid var(--track-color, var(--ac-wood-dark));
+    text-align: center;
+    transition: transform .2s ease;
+}
+
+.track-card:hover {
+    transform: translateY(-6pt) rotate(-.6deg);
+}
+
+.track-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8pt;
+}
+
+.track-name {
+    font-size: 14pt;
+    margin-bottom: 6pt;
+}
+
+.track-desc {
+    font-size: 10.5pt;
+}
+
+@media (max-width: 900px) {
+    .tracks-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .tracks-grid {
+        grid-template-columns: 1fr;
+    }
+}

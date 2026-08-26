@@ -1,0 +1,252 @@
+/* ==========================================================================
+   TigerHacks 2026 — "Island Life" theme
+   An Animal Crossing-inspired reskin — bubbly cards, bouncy rounded type,
+   a soft outlined "cartoon" look — recolored to the Med/Health Tech brand
+   palette (teal / off-white / sky blue / mint / white / light orange).
+   Wood-toned vars are kept only for the literal wood-plank signpost and
+   picket-fence texture bits; everything else pulls from the new palette.
+   ========================================================================== */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+:root {
+    /* Sky — cool sky blue fading to off-white */
+    --ac-sky-top: #D1D1FF;
+    --ac-sky-bottom: #FBF6EC;
+
+    /* Accents */
+    --ac-red: #E2574C;
+    --ac-red-dark: #C8453B;
+    --ac-red-shadow: #A83A32;
+    --ac-blue: #D1D1FF;
+    --ac-blue-dark: #7373D9;
+    --ac-yellow: #FAC3B4;
+    --ac-yellow-dark: #F2977E;
+    --ac-leaf: #E2574C;
+
+    /* Primary CTA (was grass/teal) — now the brand coral-red, reusing the
+       --ac-red scale so buttons and error states share one red family. */
+    --ac-grass: var(--ac-red);
+    --ac-grass-dark: var(--ac-red-dark);
+    --ac-grass-shadow: var(--ac-red-shadow);
+
+    /* Wood — kept brown, used ONLY by the literal wood-plank/fence texture
+       bits (.wood-panel, .fence-strip, the Fence/Acorn icons) EXCEPT
+       wood-dark/wood-darker, which double as this theme's universal card
+       & input outline color and are repointed to a warm charcoal so that
+       outline reads correctly against the new pastel fills. */
+    --ac-wood: #E0AD70;
+    --ac-wood-dark: #6B625C;
+    --ac-wood-darker: #423C38;
+
+    /* Paper / cream — off-white & white */
+    --ac-cream: #FBF6EC;
+    --ac-cream-dark: #F0E6D2;
+    --ac-paper: #FEFEFE;
+
+    /* Text — cool navy, matching the lighthouse/seaside reference */
+    --ac-text: #1E2A45;
+    --ac-text-soft: #5B6579;
+    --ac-text-on-dark: #FBF6EC;
+
+    --ac-shadow: rgba(30, 42, 69, 0.22);
+    --ac-shadow-soft: rgba(30, 42, 69, 0.12);
+
+    /* Heading 1 (page/hero titles) — brand spec calls for "Wedges", a paid
+       marketplace font we don't have files for; Fredoka is a free rounded
+       stand-in with a similar chunky, bubbly feel. */
+    --font-heading-1: 'Fredoka', 'Poppins-Bold', sans-serif;
+    /* Heading 2 (section/card titles, nav, buttons, tags) — Manjari, bold. */
+    --font-heading: 'Manjari', 'Poppins-Bold', sans-serif;
+    --font-body: 'Montserrat', 'Poppins', sans-serif;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--ac-text);
+}
+
+h1 {
+    font-family: var(--font-heading-1);
+}
+
+body, p, a, span, button, input, textarea, li {
+    font-family: var(--font-body);
+}
+
+p {
+    color: var(--ac-text-soft);
+    line-height: 1.6;
+}
+
+/* ---------- generic surfaces ---------- */
+
+.wood-panel {
+    position: relative;
+    overflow: hidden;
+    background-image:
+        linear-gradient(180deg, rgba(224, 173, 112, 0.45) 0%, rgba(96, 60, 30, 0.62) 100%),
+        url('../assets/textures/plank.png');
+    background-size: cover, 210px 210px;
+    background-repeat: no-repeat, repeat;
+    border: 4px solid var(--ac-wood-darker);
+    border-radius: 22px;
+    box-shadow: 0 6px 0 var(--ac-wood-darker), 0 12px 20px var(--ac-shadow-soft);
+}
+
+.paper-card {
+    background-color: var(--ac-paper);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 4pt 18pt var(--ac-shadow-soft);
+}
+
+/* a repeating flat-vector picket-fence tile, sized by the element's own
+   height — used along the grass hill and footer top edge. Drawn inline
+   (rather than a photo-real texture asset) so it matches the flat
+   cartoon style of the rest of the theme. */
+.fence-strip {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 40'%3E%3Crect x='0' y='18' width='24' height='6' fill='%23B9793F'/%3E%3Crect x='0' y='30' width='24' height='6' fill='%23B9793F'/%3E%3Crect x='4' y='4' width='12' height='34' rx='3' fill='%23E0AD70' stroke='%237A4B26' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: bottom center;
+    background-size: auto 100%;
+}
+
+.section-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    position: relative;
+    /* clears the sticky navbar (top: 14pt + its own height) when a nav
+       link smooth-scrolls a section into view, so the heading doesn't
+       land tucked underneath it */
+    scroll-margin-top: 100pt;
+}
+
+.section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ac-cream-dark);
+    border: none;
+    color: var(--ac-text);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 13pt;
+    padding: 6pt 20pt;
+    border-radius: 100pt;
+    box-shadow: 0 2pt 6pt var(--ac-shadow-soft);
+    margin-bottom: 14pt;
+}
+
+.section-heading {
+    font-size: min(38pt, 7vw);
+    margin-bottom: 8pt;
+}
+
+.section-sub {
+    max-width: 620pt;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40pt;
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8pt;
+    padding: 12pt 34pt;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 14pt;
+    line-height: 1;
+    color: var(--ac-text-on-dark);
+    background: var(--ac-grass);
+    border: none;
+    border-radius: 100pt;
+    box-shadow: 0 4pt 12pt rgba(200, 69, 59, 0.35);
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2pt);
+    background: var(--ac-grass-dark);
+}
+
+.btn:active {
+    transform: translateY(1pt);
+    box-shadow: 0 2pt 6pt rgba(200, 69, 59, 0.3);
+}
+
+.btn-outline {
+    background: var(--ac-paper);
+    color: var(--ac-text);
+    border: 2px solid var(--ac-cream-dark);
+    box-shadow: 0 2pt 8pt var(--ac-shadow-soft);
+}
+
+/* ---------- floating clouds ---------- */
+
+@keyframes driftCloudWide {
+    from { transform: translateX(-70px); }
+    to { transform: translateX(70px); }
+}
+
+@keyframes driftCloudMedium {
+    from { transform: translateX(-40px); }
+    to { transform: translateX(40px); }
+}
+
+@keyframes driftCloudNarrow {
+    from { transform: translateX(-20px); }
+    to { transform: translateX(20px); }
+}
+
+.cloud {
+    position: absolute;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+.cloud-1 { animation: driftCloudMedium 16s ease-in-out infinite alternate; }
+.cloud-2 { animation: driftCloudWide 24s ease-in-out infinite alternate; }
+.cloud-3 { animation: driftCloudNarrow 11s ease-in-out infinite alternate; }
+
+@media (prefers-reduced-motion: reduce) {
+    .cloud-1, .cloud-2, .cloud-3 {
+        animation: none;
+    }
+}
+
+/* ---------- little bounce used for playful icons ---------- */
+
+@keyframes acBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.ac-bounce {
+    animation: acBounce 2.4s ease-in-out infinite;
+}
+
+@media (max-width: 800px) {
+    .section-wrap { padding: 40px 18px; }
+}

@@ -1,0 +1,39 @@
+.not-found {
+    position: relative;
+    overflow: hidden;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, var(--ac-sky-top) 0%, var(--ac-sky-bottom) 100%);
+}
+
+.not-found-card {
+    position: relative;
+    z-index: 2;
+    padding: 40pt 46pt;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.not-found-logo {
+    width: 90pt;
+    margin-bottom: 4pt;
+}
+
+.not-found-leaf {
+    width: 26pt;
+    margin-bottom: 4pt;
+}
+
+.not-found-title {
+    font-size: 48pt;
+    margin: 4pt 0;
+}
+
+.not-found-text {
+    max-width: 300pt;
+    margin-bottom: 20pt;
+}

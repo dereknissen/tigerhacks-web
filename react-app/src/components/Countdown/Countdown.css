@@ -1,0 +1,146 @@
+.countdown-card {
+    position: relative;
+    width: 300pt;
+    max-width: 84vw;
+    padding: 16pt 18pt 14pt;
+    text-align: center;
+}
+
+.countdown-header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10pt;
+    margin-bottom: 12pt;
+}
+
+.countdown-header-line {
+    flex: 1;
+    max-width: 26pt;
+    height: 1.5px;
+    background: var(--ac-cream-dark);
+}
+
+.countdown-header-text {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 10.5pt;
+    color: var(--ac-text);
+    white-space: nowrap;
+}
+
+.countdown-digits {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6pt;
+}
+
+.countdown-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--ac-paper);
+    border: 2px solid var(--ac-cream-dark);
+    border-radius: 8pt;
+    padding: 6pt 8pt 5pt;
+    min-width: 38pt;
+}
+
+.countdown-num {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 20pt;
+    color: var(--ac-text);
+    letter-spacing: 1pt;
+    line-height: 1;
+}
+
+.countdown-label {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 7pt;
+    text-transform: uppercase;
+    color: var(--ac-text-soft);
+    letter-spacing: 1pt;
+    margin-top: 3pt;
+}
+
+.countdown-dot {
+    width: 4pt;
+    height: 4pt;
+    border-radius: 100pt;
+    background: var(--ac-text-soft);
+    margin-bottom: 10pt;
+    flex-shrink: 0;
+}
+
+.countdown-footer {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10pt;
+    margin-top: 12pt;
+}
+
+.countdown-footer-line {
+    flex: 1;
+    max-width: 36pt;
+    height: 1.5px;
+    background: var(--ac-cream-dark);
+}
+
+.countdown-caption {
+    position: relative;
+    z-index: 1;
+    color: var(--ac-text-soft);
+    font-size: 8pt;
+    margin: 10pt 0 0;
+    text-align: center;
+}
+
+.countdown-caption-big {
+    font-family: var(--font-heading);
+    font-size: 11pt;
+    color: var(--ac-red);
+    padding: 4pt 2pt 0;
+}
+
+/* ---------- night mode (Landing hero toggle) ---------- */
+
+.hero-sky-dark .countdown-card.paper-card {
+    background-color: var(--ac-text);
+    background-image: none;
+    box-shadow: 0 4pt 18pt rgba(0, 0, 0, 0.4);
+}
+
+.hero-sky-dark .countdown-header-text,
+.hero-sky-dark .countdown-num {
+    color: var(--ac-cream);
+}
+
+.hero-sky-dark .countdown-label,
+.hero-sky-dark .countdown-caption {
+    color: #9AA3B8;
+}
+
+.hero-sky-dark .countdown-cell {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.hero-sky-dark .countdown-header-line,
+.hero-sky-dark .countdown-footer-line {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.hero-sky-dark .countdown-dot {
+    background: #9AA3B8;
+}

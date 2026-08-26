@@ -1,0 +1,193 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6pt;
+    text-align: left;
+    margin-bottom: 20pt;
+}
+
+.field-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 11pt;
+    color: var(--ac-text);
+}
+
+.field-required {
+    color: var(--ac-red-dark);
+    margin-left: 3pt;
+}
+
+.field-hint {
+    font-size: 9.5pt;
+    color: var(--ac-text-soft);
+    margin-top: -2pt;
+}
+
+.field-error {
+    font-size: 9.5pt;
+    color: var(--ac-red-dark);
+    font-family: var(--font-heading);
+    margin-top: -1pt;
+}
+
+.field-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 8pt;
+    background: #FDECEA;
+    border: 2px solid var(--ac-red-dark);
+    border-radius: 12pt;
+    padding: 10pt 14pt;
+    font-size: 10pt;
+    color: #7A2E2A;
+    margin-top: 4pt;
+}
+
+.ac-input,
+.ac-select,
+.ac-textarea {
+    width: 100%;
+    padding: 10pt 14pt;
+    border: 1.5px solid var(--ac-cream-dark);
+    border-radius: 12pt;
+    background: var(--ac-paper);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 11pt;
+    color: var(--ac-text);
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.ac-textarea {
+    resize: vertical;
+    min-height: 70pt;
+    font-weight: 500;
+}
+
+.ac-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%231E2A45'%3E%3Cpath d='M5.5 7.5l4.5 5 4.5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12pt center;
+    background-size: 16pt;
+    padding-right: 36pt;
+}
+
+.ac-input:focus,
+.ac-select:focus,
+.ac-textarea:focus {
+    outline: none;
+    border-color: var(--ac-leaf);
+    box-shadow: 0 0 0 3pt rgba(226, 87, 76, .22);
+}
+
+.field-invalid .ac-input,
+.field-invalid .ac-select,
+.field-invalid .ac-textarea {
+    border-color: var(--ac-red-dark);
+}
+
+/* ---------- chip radio group ---------- */
+
+.chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8pt;
+}
+
+.chip-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.chip-option label {
+    display: inline-flex;
+    align-items: center;
+    padding: 8pt 18pt;
+    border: 1.5px solid var(--ac-cream-dark);
+    border-radius: 100pt;
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 10.5pt;
+    color: var(--ac-text);
+    background: var(--ac-paper);
+    cursor: pointer;
+    transition: .15s ease;
+}
+
+.chip-option input:checked + label {
+    background: var(--ac-leaf);
+    border-color: var(--ac-grass-shadow);
+    color: white;
+}
+
+.chip-option input:focus-visible + label {
+    box-shadow: 0 0 0 3pt rgba(226, 87, 76, .35);
+}
+
+/* ---------- checkbox agreement ---------- */
+
+.agree-field {
+    display: flex;
+    align-items: flex-start;
+    gap: 10pt;
+    background: var(--ac-paper);
+    border: 1.5px solid var(--ac-cream-dark);
+    border-radius: 14pt;
+    padding: 12pt 16pt;
+    margin-bottom: 16pt;
+}
+
+.agree-field input {
+    margin-top: 3pt;
+    width: 18pt;
+    height: 18pt;
+    accent-color: var(--ac-leaf);
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.agree-field label {
+    font-size: 10pt;
+    color: var(--ac-text-soft);
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.agree-field a {
+    color: var(--ac-blue-dark);
+    text-decoration: underline;
+}
+
+.field-invalid.agree-field {
+    border-color: var(--ac-red-dark);
+}
+
+/* ---------- form section card ---------- */
+
+.form-section {
+    margin-bottom: 22pt;
+    padding: 26pt 26pt 8pt;
+}
+
+.form-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8pt;
+    font-size: 15pt;
+    margin-bottom: 4pt;
+}
+
+.form-section-desc {
+    font-size: 10pt;
+    margin-bottom: 18pt;
+}
+
+@media (max-width: 700px) {
+    .form-section {
+        padding: 20pt 18pt 6pt;
+    }
+}

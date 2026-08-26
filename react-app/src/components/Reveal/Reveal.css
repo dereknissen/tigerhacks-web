@@ -1,0 +1,18 @@
+.reveal {
+    opacity: 0;
+    transform: translateY(28pt) scale(.92) rotate(-2deg);
+    transition: opacity .55s cubic-bezier(.22, 1, .36, 1), transform .65s cubic-bezier(.22, 1.4, .36, 1);
+}
+
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

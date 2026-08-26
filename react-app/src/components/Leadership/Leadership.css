@@ -1,0 +1,60 @@
+.leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20pt;
+}
+
+.leader-card {
+    padding: 26pt 18pt;
+    text-align: center;
+    transition: transform .2s ease;
+}
+
+.leader-card:hover {
+    transform: translateY(-6pt);
+}
+
+.leader-avatar {
+    width: 64pt;
+    height: 64pt;
+    margin: 0 auto 12pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100pt;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 16pt;
+    color: var(--ac-text);
+}
+
+.leader-photo {
+    width: 64pt;
+    height: 64pt;
+    margin: 0 auto 12pt;
+    border-radius: 100pt;
+    object-fit: cover;
+    display: block;
+}
+
+.leader-name {
+    font-size: 13pt;
+    margin-bottom: 3pt;
+}
+
+.leader-role {
+    font-size: 10pt;
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .leadership-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .leadership-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -12,7 +12,7 @@ import Tracks from '../../components/Tracks/Tracks';
 import Leadership from '../../components/Leadership/Leadership';
 import FAQ from '../../components/FAQ/FAQ';
 import Footer from '../../components/Footer/Footer';
-import { Pulse, Sun, Moon } from '../../components/Icons/Icons';
+import { Pulse, SpeakerOn, SpeakerOff } from '../../components/Icons/Icons';
 import Parallax from '../../components/Parallax/Parallax';
 
 /* Images */
@@ -26,11 +26,13 @@ import FaqSign from '../../assets/theme/faq.png';
 import Instagram from '../../assets/icons/instagram.png';
 import Discord from '../../assets/icons/discord.png';
 
-/* React Dependencies */
-import { useContext, useEffect, useState } from 'react';
-import { WindowWidthContext } from '../../App';
+/* Sounds */
+import DaySound from '../../assets/sounds/day.mp3';
+import NightSound from '../../assets/sounds/night.mp3';
 
-const THEME_KEY = 'tigerhacks-hero-theme';
+/* React Dependencies */
+import { useContext, useEffect, useRef, useState } from 'react';
+import { WindowWidthContext, ThemeContext } from '../../App';
 
 const NAV_SIGNS = [
     { name: 'About', img: AboutSign, link: '#about', side: 'right', top: '14.5%' },
@@ -41,15 +43,45 @@ const NAV_SIGNS = [
 
 export default function Landing() {
     const windowWidth = useContext(WindowWidthContext);
-    const [isDark, setIsDark] = useState(() => localStorage.getItem(THEME_KEY) === 'dark');
+    const { isDark } = useContext(ThemeContext);
+    const [soundOn, setSoundOn] = useState(false);
+    const dayAudioRef = useRef(null);
+    const nightAudioRef = useRef(null);
+
+    /* Two looping ambience tracks, one per time of day. Sound starts off by
+       default (autoplay-with-audio is blocked by browsers anyway until a
+       user gesture, and unexpected audio on page load is just annoying) —
+       visitors opt in via the speaker toggle. */
+    useEffect(() => {
+        const day = new Audio(DaySound);
+        const night = new Audio(NightSound);
+        day.loop = true;
+        night.loop = true;
+        day.volume = 0.35;
+        night.volume = 0.35;
+        dayAudioRef.current = day;
+        nightAudioRef.current = night;
+        return () => {
+            day.pause();
+            night.pause();
+        };
+    }, []);
 
     useEffect(() => {
-        localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
-    }, [isDark]);
+        const active = isDark ? nightAudioRef.current : dayAudioRef.current;
+        const inactive = isDark ? dayAudioRef.current : nightAudioRef.current;
+        if (!active || !inactive) return;
+        inactive.pause();
+        if (soundOn) {
+            active.play().catch(() => {});
+        } else {
+            active.pause();
+        }
+    }, [isDark, soundOn]);
 
     return (
         <div>
-            <Navbar isDark={isDark} />
+            <Navbar />
 
             {/* Hero Section */}
             <div
@@ -58,11 +90,11 @@ export default function Landing() {
             >
                 <button
                     type="button"
-                    className="hero-theme-toggle"
-                    onClick={() => setIsDark((d) => !d)}
-                    aria-label={isDark ? 'Switch to day' : 'Switch to night'}
+                    className="hero-sound-toggle"
+                    onClick={() => setSoundOn((s) => !s)}
+                    aria-label={soundOn ? 'Mute ambience' : 'Play ambience'}
                 >
-                    {isDark ? <Moon style={{ width: '18pt' }} /> : <Sun style={{ width: '18pt' }} />}
+                    {soundOn ? <SpeakerOn style={{ width: '18pt' }} /> : <SpeakerOff style={{ width: '18pt' }} />}
                 </button>
 
                 <Signpost signs={NAV_SIGNS} />
@@ -97,10 +129,10 @@ export default function Landing() {
 
                     <div className="fade-in-anim hero-bottom-row">
                         <div className="hero-socials">
-                            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-media-link social-badge">
+                            <a href="https://www.instagram.com/tigerhacks/" target="_blank" rel="noreferrer" className="social-media-link social-badge">
                                 <img src={Instagram} alt="Instagram" />
                             </a>
-                            <a href="https://discord.com" target="_blank" rel="noreferrer" className="social-media-link social-badge">
+                            <a href="https://discord.gg/NwsWUB7Fp9" target="_blank" rel="noreferrer" className="social-media-link social-badge">
                                 <img src={Discord} alt="Discord" />
                             </a>
                         </div>

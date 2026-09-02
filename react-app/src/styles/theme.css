@@ -73,6 +73,32 @@ html {
     --font-body: 'Montserrat', 'Poppins', sans-serif;
 }
 
+/* ---------- night mode ----------
+   Sitewide dark mode is just re-pointing the same semantic tokens
+   everything already reads from (--ac-paper for card backgrounds,
+   --ac-text for headings/body copy, --ac-cream(-dark) for chip/page
+   backgrounds, etc.) — since nearly every component already pulls its
+   colors from these variables instead of hardcoded hex, this one block
+   is enough to re-theme cards, text, the navbar, and the page background
+   everywhere at once, with no per-component dark CSS needed.
+   --ac-text-on-dark is deliberately NOT overridden here: it's "text that
+   sits on the red button/dark navbar", which stays light in both themes
+   since the red button itself doesn't change color. */
+.theme-dark {
+    --ac-sky-top: #10182C;
+    --ac-sky-bottom: #1B2740;
+
+    --ac-cream: #16203A;
+    --ac-cream-dark: #10182C;
+    --ac-paper: #1E2A45;
+
+    --ac-text: #F5F5DD;
+    --ac-text-soft: #9AA3B8;
+
+    --ac-shadow: rgba(0, 0, 0, 0.45);
+    --ac-shadow-soft: rgba(0, 0, 0, 0.3);
+}
+
 h1, h2, h3, h4 {
     font-family: var(--font-heading);
     font-weight: 700;
@@ -172,7 +198,7 @@ p {
     align-items: center;
     justify-content: center;
     gap: 8pt;
-    padding: 12pt 34pt;
+    padding: 12.25pt 34pt 11.75pt;
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 14pt;

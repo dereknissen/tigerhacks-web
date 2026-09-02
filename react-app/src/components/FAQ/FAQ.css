@@ -43,10 +43,36 @@
     align-items: center;
     justify-content: center;
     font-size: 14pt;
+    transition: transform .25s ease;
+}
+
+.faq-toggle-open {
+    transform: rotate(45deg);
+}
+
+.faq-answer-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .25s ease;
+}
+
+.faq-answer-wrap-open {
+    grid-template-rows: 1fr;
+}
+
+.faq-answer-inner {
+    overflow: hidden;
 }
 
 .faq-answer {
     margin: 0 0 16pt;
     text-align: left;
     font-size: 11pt;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .faq-toggle,
+    .faq-answer-wrap {
+        transition: none;
+    }
 }

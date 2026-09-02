@@ -6,10 +6,14 @@
 }
 
 #navbar {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
-    padding: 8pt 12pt 8pt 8pt;
+    gap: 8pt;
+    /* extra right padding reserves room so the absolutely-positioned
+       .nav-theme-toggle (floated off navbar-wrap's corner, independent
+       of the pill) never overlaps the Register button or burger icon */
+    padding: 8pt 56pt 8pt 8pt;
     max-width: 1180px;
     margin: 0 auto;
     background: var(--ac-paper);
@@ -21,6 +25,7 @@
     display: flex;
     align-items: center;
     gap: 10pt;
+    justify-self: start;
 }
 
 .nav-logo {
@@ -43,6 +48,13 @@
 .nav-links {
     display: flex;
     gap: 8pt;
+    justify-self: center;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    justify-self: end;
 }
 
 .nav-link {
@@ -64,7 +76,7 @@
 }
 
 .nav-register {
-    padding: 9pt 22pt;
+    padding: 9.6pt 22pt 8.4pt;
     font-size: 11pt;
 }
 
@@ -112,28 +124,23 @@
     margin-top: 8pt;
 }
 
-/* ---------- night mode (Landing page hero toggle) ---------- */
-
-#navbar.nav-dark {
-    background: var(--ac-text);
-    box-shadow: 0 4pt 18pt rgba(0, 0, 0, 0.4);
+.nav-theme-toggle {
+    position: absolute;
+    top: 50%;
+    right: 16pt;
+    transform: translateY(-50%);
+    flex-shrink: 0;
+    width: 34pt;
+    height: 34pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100pt;
+    background: var(--ac-cream);
+    box-shadow: 0 4pt 18pt var(--ac-shadow-soft);
+    transition: transform .15s ease;
 }
 
-.nav-dark .nav-logo {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.nav-dark .nav-brand-text,
-.nav-dark .nav-link {
-    color: var(--ac-cream);
-}
-
-.nav-dark .nav-link:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.nav-mobile-menu.nav-dark {
-    background-color: var(--ac-text);
-    background-image: none;
-    border-color: rgba(255, 255, 255, 0.15);
+.nav-theme-toggle:hover {
+    transform: translateY(calc(-50% - 1pt));
 }

@@ -26,7 +26,7 @@
        the scene shows through there too, instead of plain page
        background peeking out around the pill. padding-top adds the same
        amount back so in-flow content (.hero-content) lands in the same
-       place as before — only .hero-theme-toggle (position:absolute, so
+       place as before — only .hero-sound-toggle (position:absolute, so
        it ignores padding and reads straight off the shifted box) needs
        its own top offset bumped by the same 48pt to compensate. */
     margin-top: -48pt;
@@ -38,7 +38,7 @@
     transition: background-image .3s ease;
 }
 
-.hero-theme-toggle {
+.hero-sound-toggle {
     position: absolute;
     z-index: 4;
     top: 64pt;
@@ -56,11 +56,11 @@
     transition: transform .15s ease, box-shadow .15s ease;
 }
 
-.hero-theme-toggle:hover {
+.hero-sound-toggle:hover {
     transform: translateY(-2pt);
 }
 
-.hero-theme-toggle:active {
+.hero-sound-toggle:active {
     transform: translateY(1pt);
 }
 
@@ -117,35 +117,15 @@
     font-size: 11pt;
 }
 
-/* ---------- night mode ---------- */
-
-.hero-sky-dark .hero-board.paper-card {
-    background-color: var(--ac-text);
-    box-shadow: 0 4pt 18pt rgba(0, 0, 0, 0.4);
-}
-
-.hero-sky-dark .hero-title {
-    color: var(--ac-cream);
-}
-
-.hero-sky-dark .hero-tagline {
-    color: #B8BFCF;
-}
-
-.hero-sky-dark .section-tag {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--ac-cream);
-    box-shadow: none;
-}
+/* ---------- night mode ----------
+   Card/text/badge colors all re-theme for free via the global .theme-dark
+   variable overrides in theme.css (--ac-paper, --ac-text, --ac-cream-dark,
+   etc.) — the only thing that needs its own rule here is the signpost art,
+   since it's a raster image rather than a themed CSS surface. */
 
 .hero-sky-dark .signpost-sign img,
 .hero-sky-dark .sign-img {
     filter: brightness(0.72) saturate(1.15);
-}
-
-.hero-sky-dark .social-badge {
-    background: var(--ac-text);
-    box-shadow: 0 4pt 12pt rgba(0, 0, 0, 0.4);
 }
 
 /* ---------- free-floating trail signs ---------- */

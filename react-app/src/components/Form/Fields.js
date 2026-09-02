@@ -64,6 +64,30 @@ export function SelectField({ label, required, hint, error, options, placeholder
     );
 }
 
+export function FileField({ label, required, hint, error, accept, fileName, id, onChange }) {
+    return (
+        <div className={`field ${error ? 'field-invalid' : ''}`}>
+            <label className="field-label" htmlFor={id}>
+                {label}
+                {required && <span className="field-required">*</span>}
+            </label>
+            {hint && <span className="field-hint">{hint}</span>}
+            <label className="ac-file">
+                <input
+                    id={id}
+                    type="file"
+                    accept={accept}
+                    className="ac-file-input"
+                    onChange={onChange}
+                />
+                <span className="ac-file-btn">Choose file</span>
+                <span className="ac-file-name">{fileName || 'No file selected'}</span>
+            </label>
+            {error && <span className="field-error">{error}</span>}
+        </div>
+    );
+}
+
 export function ChipGroup({ label, required, hint, error, name, options, value, onChange }) {
     return (
         <div className={`field ${error ? 'field-invalid' : ''}`}>
@@ -91,15 +115,6 @@ export function ChipGroup({ label, required, hint, error, name, options, value, 
                 })}
             </div>
             {error && <span className="field-error">{error}</span>}
-        </div>
-    );
-}
-
-export function AgreeCheckbox({ id, checked, onChange, error, children }) {
-    return (
-        <div className={`agree-field ${error ? 'field-invalid' : ''}`}>
-            <input type="checkbox" id={id} checked={checked} onChange={(e) => onChange(e.target.checked)} />
-            <label htmlFor={id}>{children}</label>
         </div>
     );
 }

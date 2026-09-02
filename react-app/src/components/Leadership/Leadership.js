@@ -7,6 +7,7 @@ import QuinnPhoto from '../../assets/portraits/quinn.png';
 import GinaPhoto from '../../assets/portraits/gina.jpeg';
 import ElisePhoto from '../../assets/portraits/elise.jpeg';
 import DerekPhoto from '../../assets/portraits/derek.jpeg';
+import LeeAnnPhoto from '../../assets/portraits/leeann.jpg';
 
 const AVATAR_COLORS = ['#FAC3B4', '#D1D1FF', '#ADADEF', '#F2977E', '#7373D9', '#E2574C'];
 
@@ -14,7 +15,7 @@ const LEADERS = [
     { name: 'Ashton Wooster', role: 'Chair', photo: AshtonPhoto },
     { name: 'Quinn DeCota', role: 'Finance Lead', photo: QuinnPhoto },
     { name: 'Gina Hua', role: 'Marketing Lead', photo: GinaPhoto },
-    { name: 'LeeAnn Lin', role: 'HackerX Lead' },
+    { name: 'LeeAnn Lin', role: 'HackerX Lead', photo: LeeAnnPhoto },
     { name: 'Elise Fidler', role: 'Logistics Lead', photo: ElisePhoto },
     { name: 'Derek Nissen', role: 'Technology Lead', photo: DerekPhoto },
 ];

@@ -76,18 +76,6 @@ export function Pulse({ style, className, color = "#F2977E" }) {
     );
 }
 
-export function Fence({ style, className }) {
-    return (
-        <svg className={className} style={style} viewBox="0 0 200 40" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0" y="18" width="200" height="6" fill="#B9793F" />
-            <rect x="0" y="30" width="200" height="6" fill="#B9793F" />
-            {Array.from({ length: 9 }).map((_, i) => (
-                <rect key={i} x={i * 24 + 4} y="4" width="12" height="34" rx="3" fill="#E0AD70" stroke="#7A4B26" strokeWidth="2" />
-            ))}
-        </svg>
-    );
-}
-
 export function PawPrint({ style, className, color = "#423C38" }) {
     return (
         <svg className={className} style={style} viewBox="0 0 64 64" fill={color} xmlns="http://www.w3.org/2000/svg">
@@ -156,6 +144,35 @@ export function Trophy({ style, className, color = "#E2574C" }) {
             <path d="M18 10h28v14c0 10-6 18-14 18s-14-8-14-18V10Z" fill={color} stroke="#423C38" strokeWidth="3" strokeLinejoin="round" />
             <path d="M32 42v8" stroke="#423C38" strokeWidth="4" strokeLinecap="round" />
             <path d="M21 58h22l-3-8H24l-3 8Z" fill={color} stroke="#423C38" strokeWidth="3" strokeLinejoin="round" />
+        </svg>
+    );
+}
+
+export function SpeakerOn({ style, className, color = "#423C38" }) {
+    return (
+        <svg className={className} style={style} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 24h9l15-11v38l-15-11H6V24Z" fill={color} stroke="#423C38" strokeWidth="3" strokeLinejoin="round" />
+            <path d="M38 22c4 5 4 15 0 20" stroke="#423C38" strokeWidth="4" strokeLinecap="round" />
+            <path d="M46 15c8 9 8 25 0 34" stroke="#423C38" strokeWidth="4" strokeLinecap="round" />
+        </svg>
+    );
+}
+
+export function SpeakerOff({ style, className, color = "#423C38" }) {
+    return (
+        <svg className={className} style={style} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 24h9l15-11v38l-15-11H6V24Z" fill={color} stroke="#423C38" strokeWidth="3" strokeLinejoin="round" />
+            <path d="M40 22l16 16M56 22L40 38" stroke="#423C38" strokeWidth="4" strokeLinecap="round" />
+        </svg>
+    );
+}
+
+export function Compass({ style, className, color = "#ADADEF" }) {
+    return (
+        <svg className={className} style={style} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="32" r="26" fill={color} stroke="#423C38" strokeWidth="3" />
+            <path d="M40 24L28 30L24 42L36 36L40 24Z" fill="#FEFEFE" stroke="#423C38" strokeWidth="2.5" strokeLinejoin="round" />
+            <circle cx="32" cy="32" r="2.5" fill="#423C38" />
         </svg>
     );
 }

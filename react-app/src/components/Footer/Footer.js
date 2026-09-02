@@ -2,6 +2,7 @@ import './Footer.css';
 import Logo from '../../assets/logo/tigerhacks-color.png';
 import Instagram from '../../assets/icons/instagram.png';
 import Discord from '../../assets/icons/discord.png';
+import { Heart } from '../Icons/Icons';
 
 export default function Footer() {
     return (
@@ -24,16 +25,18 @@ export default function Footer() {
                 </div>
 
                 <div className="footer-social">
-                    <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-media-link footer-social-badge">
+                    <a href="https://www.instagram.com/tigerhacks/" target="_blank" rel="noreferrer" className="social-media-link footer-social-badge">
                         <img src={Instagram} alt="Instagram" />
                     </a>
-                    <a href="https://discord.com" target="_blank" rel="noreferrer" className="social-media-link footer-social-badge">
+                    <a href="https://discord.gg/NwsWUB7Fp9" target="_blank" rel="noreferrer" className="social-media-link footer-social-badge">
                         <img src={Discord} alt="Discord" />
                     </a>
                 </div>
             </div>
 
-            <p className="footer-copyright">Made with 🍃 by the TigerHacks team &middot; &copy; 2026</p>
+            <p className="footer-copyright">
+                Made with <Heart className="footer-heart" color="#E2574C" /> by the TigerHacks team &middot; &copy; 2026
+            </p>
         </footer>
     );
 }

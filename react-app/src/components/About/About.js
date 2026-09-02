@@ -23,7 +23,7 @@ export default function About() {
                 tag="About the island"
                 icon={<Leaf style={{ width: '14pt' }} />}
                 title="What is TigerHacks?"
-                subtitle="TigerHacks is Mizzou's biggest hackathon: a cozy, welcoming weekend where students of every skill level gather to build, learn, and ship something new. Grab your friends, pitch a tent on our island, and spend the weekend bringing your idea to life."
+                subtitle="TigerHacks is Mizzou's biggest hackathon: a welcoming weekend where students of every skill level gather to build, learn, and ship something new. Grab your friends, pitch a tent on our island, and spend the weekend bringing your idea to life."
             />
 
             <p className="about-theme-callout">

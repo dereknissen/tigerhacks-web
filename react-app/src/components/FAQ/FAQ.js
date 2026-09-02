@@ -43,11 +43,15 @@ export default function FAQ() {
                     const isOpen = openIndex === index;
                     return (
                         <Reveal key={item.q} delay={index * 0.07} className={`faq-item paper-card ${isOpen ? 'faq-item-open' : ''}`}>
-                            <button className="faq-question" onClick={() => setOpenIndex(isOpen ? -1 : index)}>
+                            <button className="faq-question" onClick={() => setOpenIndex(isOpen ? -1 : index)} aria-expanded={isOpen}>
                                 <span>{item.q}</span>
-                                <span className="faq-toggle">{isOpen ? '−' : '+'}</span>
+                                <span className={`faq-toggle ${isOpen ? 'faq-toggle-open' : ''}`}>+</span>
                             </button>
-                            {isOpen && <p className="faq-answer">{item.a}</p>}
+                            <div className={`faq-answer-wrap ${isOpen ? 'faq-answer-wrap-open' : ''}`}>
+                                <div className="faq-answer-inner">
+                                    <p className="faq-answer">{item.a}</p>
+                                </div>
+                            </div>
                         </Reveal>
                     );
                 })}

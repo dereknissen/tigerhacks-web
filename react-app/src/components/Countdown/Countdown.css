@@ -113,34 +113,3 @@
     padding: 4pt 2pt 0;
 }
 
-/* ---------- night mode (Landing hero toggle) ---------- */
-
-.hero-sky-dark .countdown-card.paper-card {
-    background-color: var(--ac-text);
-    background-image: none;
-    box-shadow: 0 4pt 18pt rgba(0, 0, 0, 0.4);
-}
-
-.hero-sky-dark .countdown-header-text,
-.hero-sky-dark .countdown-num {
-    color: var(--ac-cream);
-}
-
-.hero-sky-dark .countdown-label,
-.hero-sky-dark .countdown-caption {
-    color: #9AA3B8;
-}
-
-.hero-sky-dark .countdown-cell {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.15);
-}
-
-.hero-sky-dark .countdown-header-line,
-.hero-sky-dark .countdown-footer-line {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.hero-sky-dark .countdown-dot {
-    background: #9AA3B8;
-}

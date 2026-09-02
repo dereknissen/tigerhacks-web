@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import Logo from '../../assets/logo/tigerhacks-color.png';
-import { WindowWidthContext } from '../../App';
+import { WindowWidthContext, ThemeContext } from '../../App';
+import { Sun, Moon } from '../Icons/Icons';
 import './Navbar.css';
 
 const LINKS = [
@@ -10,14 +11,15 @@ const LINKS = [
     { label: 'FAQ', href: '/#faq' },
 ];
 
-export default function Navbar({ isDark = false }) {
+export default function Navbar() {
     const windowWidth = useContext(WindowWidthContext);
+    const { isDark, setIsDark } = useContext(ThemeContext);
     const isMobile = windowWidth <= 800;
     const [open, setOpen] = useState(false);
 
     return (
         <div id="navbar-wrap">
-            <nav id="navbar" className={isDark ? 'nav-dark' : ''}>
+            <nav id="navbar">
                 <a href="/" className="nav-brand">
                     <img src={Logo} alt="TigerHacks logo" className="nav-logo" />
                     <span className="nav-brand-text">TigerHacks</span>
@@ -33,25 +35,36 @@ export default function Navbar({ isDark = false }) {
                     </div>
                 )}
 
-                {!isMobile && (
-                    <a className="btn nav-register" href="/register">Register</a>
-                )}
+                <div className="nav-right">
+                    {!isMobile && (
+                        <a className="btn nav-register" href="/register">Register</a>
+                    )}
 
-                {isMobile && (
-                    <button
-                        aria-label="Toggle menu"
-                        className={`nav-burger ${open ? 'nav-burger-open' : ''}`}
-                        onClick={() => setOpen((o) => !o)}
-                    >
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                )}
+                    {isMobile && (
+                        <button
+                            aria-label="Toggle menu"
+                            className={`nav-burger ${open ? 'nav-burger-open' : ''}`}
+                            onClick={() => setOpen((o) => !o)}
+                        >
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    )}
+                </div>
             </nav>
 
+            <button
+                type="button"
+                className="nav-theme-toggle"
+                onClick={() => setIsDark((d) => !d)}
+                aria-label={isDark ? 'Switch to day' : 'Switch to night'}
+            >
+                {isDark ? <Moon style={{ width: '15pt' }} /> : <Sun style={{ width: '15pt' }} />}
+            </button>
+
             {isMobile && open && (
-                <div className={`nav-mobile-menu paper-card fade-in-anim ${isDark ? 'nav-dark' : ''}`}>
+                <div className="nav-mobile-menu paper-card fade-in-anim">
                     {LINKS.map((link) => (
                         <a key={link.label} className="nav-link" href={link.href} onClick={() => setOpen(false)}>
                             {link.label}

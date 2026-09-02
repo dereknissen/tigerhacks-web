@@ -3,10 +3,10 @@ import './Register.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
-import { FormSection, TextField, TextAreaField, SelectField, ChipGroup, AgreeCheckbox } from '../../components/Form/Fields';
-import { PawPrint, Bell, Leaf, Acorn, Heart } from '../../components/Icons/Icons';
+import { FormSection, TextField, TextAreaField, SelectField, ChipGroup, FileField } from '../../components/Form/Fields';
+import { PawPrint, Bell, Leaf, Compass, Heart } from '../../components/Icons/Icons';
 import { COUNTRIES } from '../../config/countries';
-import { submitRegistration } from '../../config/googleForm';
+import { submitRegistration } from '../../config/registration';
 
 const YEAR_OPTIONS = ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Other'];
 const SHIRT_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
@@ -16,13 +16,21 @@ const HEARD_ABOUT_OPTIONS = [
 ];
 const MAX_TEAMMATES = 3;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const RESUME_EXT_RE = /\.(pdf|doc|docx)$/i;
+const RESUME_MAX_BYTES = 10 * 1024 * 1024;
+const RESUME_ACCEPT = [
+    '.pdf', '.doc', '.docx',
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+].join(',');
 
 const emptyValues = {
-    fullName: '', school: '', year: '', major: '', discord: '',
+    fullName: '', email: '', school: '', year: '', major: '', discord: '',
     teammates: [],
     judgingCategory: '', shirtSize: '', dietary: '',
     heardAbout: '', heardAboutOther: '', linkedin: '', country: '',
-    codeOfConduct: false, mlhShare: false, mlhEmailOptIn: '',
+    resume: null,
 };
 
 export default function Register() {
@@ -44,6 +52,11 @@ export default function Register() {
         setValues((v) => ({ ...v, teammates: v.teammates.filter((_, idx) => idx !== i) }));
     };
 
+    const setResume = (e) => {
+        const file = e.target.files && e.target.files[0];
+        setValues((v) => ({ ...v, resume: file || null }));
+    };
+
     const updateTeammate = (i, key, val) => {
         setValues((v) => ({
             ...v,
@@ -54,6 +67,8 @@ export default function Register() {
     const validate = () => {
         const e = {};
         if (!values.fullName.trim()) e.fullName = 'Please enter your name.';
+        if (!values.email.trim()) e.email = 'Please enter your email.';
+        else if (!EMAIL_RE.test(values.email)) e.email = 'That email doesn\'t look right.';
         if (!values.school.trim()) e.school = 'Please enter your school.';
         if (!values.year) e.year = 'Please select your year.';
         if (!values.major.trim()) e.major = 'Please enter your major.';
@@ -62,9 +77,10 @@ export default function Register() {
         if (!values.shirtSize) e.shirtSize = 'Please select a shirt size.';
         if (!values.heardAbout) e.heardAbout = 'Please let us know how you heard about us.';
         if (!values.country) e.country = 'Please select your country of residence.';
-        if (!values.mlhEmailOptIn) e.mlhEmailOptIn = 'Please choose an option.';
-        if (!values.codeOfConduct) e.codeOfConduct = 'You must agree to the MLH Code of Conduct to register.';
-        if (!values.mlhShare) e.mlhShare = 'You must authorize this to register.';
+
+        if (!values.resume) e.resume = 'Please attach your resume.';
+        else if (!RESUME_EXT_RE.test(values.resume.name)) e.resume = 'Resume must be a PDF, DOC, or DOCX file.';
+        else if (values.resume.size > RESUME_MAX_BYTES) e.resume = 'Resume must be under 10 MB.';
 
         values.teammates.forEach((t, i) => {
             if (t.email && !EMAIL_RE.test(t.email)) {
@@ -79,7 +95,7 @@ export default function Register() {
     const handleSubmit = async (ev) => {
         ev.preventDefault();
         if (!validate()) {
-            document.querySelector('.field-invalid, .agree-field.field-invalid')?.scrollIntoView({
+            document.querySelector('.field-invalid')?.scrollIntoView({
                 behavior: 'smooth',
                 block: 'center',
             });
@@ -108,7 +124,7 @@ export default function Register() {
                             Keep an eye on your inbox for a confirmation email. In the meantime, come say hi on
                             Discord, that's how we'll share updates throughout the weekend.
                         </p>
-                        <a className="btn" href="https://discord.com" target="_blank" rel="noreferrer">
+                        <a className="btn" href="https://discord.gg/NwsWUB7Fp9" target="_blank" rel="noreferrer">
                             Join the Discord
                         </a>
                     </div>
@@ -134,6 +150,11 @@ export default function Register() {
                         <TextField
                             id="fullName" label="Full Name" required
                             value={values.fullName} onChange={set('fullName')} error={errors.fullName}
+                        />
+                        <TextField
+                            id="email" label="Email" type="email" required
+                            hint="We'll send your confirmation and event updates here"
+                            value={values.email} onChange={set('email')} error={errors.email}
                         />
                         <TextField
                             id="school" label="School" required
@@ -197,7 +218,7 @@ export default function Register() {
                         <ChipGroup
                             label="Judging Category" required name="judgingCategory"
                             options={['Developer', 'Beginner', 'Game Dev']}
-                            hint="New to hacking? Pick Beginner: it's judged separately so first-timers can shine."
+                            hint="New to hacking? Pick Beginner: it's judged separately so first-timers can shine. This is just an estimate — you won't be locked into this category on hackathon day."
                             value={values.judgingCategory}
                             onChange={(v) => setValues((s) => ({ ...s, judgingCategory: v }))}
                             error={errors.judgingCategory}
@@ -213,7 +234,7 @@ export default function Register() {
                         />
                     </FormSection>
 
-                    <FormSection icon={<Acorn style={{ width: '20pt' }} />} title="Logistics">
+                    <FormSection icon={<Compass style={{ width: '20pt' }} />} title="Logistics">
                         <SelectField
                             id="heardAbout" label="How did you hear about us?" required
                             options={HEARD_ABOUT_OPTIONS} value={values.heardAbout} onChange={set('heardAbout')}
@@ -231,44 +252,18 @@ export default function Register() {
                             placeholder="https://linkedin.com/in/..."
                             value={values.linkedin} onChange={set('linkedin')}
                         />
-                    </FormSection>
-
-                    <FormSection icon={<Heart style={{ width: '20pt' }} />} title="Consent">
-                        <AgreeCheckbox
-                            id="codeOfConduct" checked={values.codeOfConduct}
-                            onChange={(v) => setValues((s) => ({ ...s, codeOfConduct: v }))}
-                            error={errors.codeOfConduct}
-                        >
-                            I have read and agree to the{' '}
-                            <a href="https://mlh.io/code-of-conduct" target="_blank" rel="noreferrer">MLH Code of Conduct</a>.
-                        </AgreeCheckbox>
-
-                        <AgreeCheckbox
-                            id="mlhShare" checked={values.mlhShare}
-                            onChange={(v) => setValues((s) => ({ ...s, mlhShare: v }))}
-                            error={errors.mlhShare}
-                        >
-                            I authorize you to share my application/registration information with Major League
-                            Hacking for event administration, ranking, and MLH administration in-line with the{' '}
-                            <a href="https://mlh.io/privacy" target="_blank" rel="noreferrer">MLH Privacy Policy</a>.
-                            I further agree to the terms of both the{' '}
-                            <a href="https://github.com/MLH/mlh-policies/blob/main/contest-terms.md" target="_blank" rel="noreferrer">
-                                MLH Contest Terms and Conditions
-                            </a>{' '}
-                            and the <a href="https://mlh.io/privacy" target="_blank" rel="noreferrer">MLH Privacy Policy</a>.
-                        </AgreeCheckbox>
-
-                        <ChipGroup
-                            label="I authorize MLH to send me occasional emails about relevant events, career opportunities, and community announcements."
-                            required name="mlhEmailOptIn" options={['Yes', 'No']}
-                            value={values.mlhEmailOptIn}
-                            onChange={(v) => setValues((s) => ({ ...s, mlhEmailOptIn: v }))}
-                            error={errors.mlhEmailOptIn}
+                        <FileField
+                            id="resume" label="Resume" required
+                            accept={RESUME_ACCEPT}
+                            hint="PDF, DOC, or DOCX, up to 10 MB. Shared with our sponsors for recruiting."
+                            fileName={values.resume?.name}
+                            onChange={setResume}
+                            error={errors.resume}
                         />
 
                         <p className="discord-reminder">
                             🎮 Haven't joined our Discord yet? It's how we'll communicate with you throughout the
-                            event: <a href="https://discord.com" target="_blank" rel="noreferrer">join here</a>.
+                            event: <a href="https://discord.gg/NwsWUB7Fp9" target="_blank" rel="noreferrer">join here</a>.
                         </p>
                     </FormSection>
 

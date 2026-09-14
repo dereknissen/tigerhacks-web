@@ -6,7 +6,7 @@ const crypto = require('crypto');
 admin.initializeApp();
 
 const SPREADSHEET_ID = '1fiRoEDP-qgW0xuKK9Ij9tyou4ZFpmUvWzBgYcg9e9y8';
-const SHEET_RANGE = 'A:U';
+const SHEET_RANGE = 'A:X';
 
 const REQUIRED_FIELDS = [
     'fullName', 'email', 'school', 'year', 'major', 'discord',
@@ -93,6 +93,9 @@ async function appendRegistrationRow(values, resumeUrl) {
         values.linkedin || '',
         values.country,
         resumeUrl,
+        values.mlhCodeOfConduct ? 'Yes' : 'No',
+        values.mlhDataSharing ? 'Yes' : 'No',
+        values.mlhMarketing ? 'Yes' : 'No',
     ];
 
     await sheets.spreadsheets.values.append({
@@ -121,6 +124,11 @@ exports.submitRegistration = onRequest(
         const resume = values.resume;
         if (!resume || !resume.data || !resume.name) {
             res.status(400).json({ error: 'Missing required field: resume' });
+            return;
+        }
+
+        if (!values.mlhCodeOfConduct || !values.mlhDataSharing) {
+            res.status(400).json({ error: 'The required MLH agreements must be accepted' });
             return;
         }
 

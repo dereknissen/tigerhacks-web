@@ -3,8 +3,8 @@ import './Register.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
-import { FormSection, TextField, TextAreaField, SelectField, ChipGroup, FileField } from '../../components/Form/Fields';
-import { PawPrint, Bell, Leaf, Compass, Heart } from '../../components/Icons/Icons';
+import { FormSection, TextField, TextAreaField, SelectField, ChipGroup, FileField, CheckboxField } from '../../components/Form/Fields';
+import { PawPrint, Bell, Leaf, Compass, Heart, People } from '../../components/Icons/Icons';
 import { COUNTRIES } from '../../config/countries';
 import { submitRegistration } from '../../config/registration';
 
@@ -31,6 +31,7 @@ const emptyValues = {
     judgingCategory: '', shirtSize: '', dietary: '',
     heardAbout: '', heardAboutOther: '', linkedin: '', country: '',
     resume: null,
+    mlhCodeOfConduct: false, mlhDataSharing: false, mlhMarketing: false,
 };
 
 export default function Register() {
@@ -57,6 +58,11 @@ export default function Register() {
         setValues((v) => ({ ...v, resume: file || null }));
     };
 
+    const toggle = (key) => (e) => {
+        const checked = e.target.checked;
+        setValues((v) => ({ ...v, [key]: checked }));
+    };
+
     const updateTeammate = (i, key, val) => {
         setValues((v) => ({
             ...v,
@@ -81,6 +87,9 @@ export default function Register() {
         if (!values.resume) e.resume = 'Please attach your resume.';
         else if (!RESUME_EXT_RE.test(values.resume.name)) e.resume = 'Resume must be a PDF, DOC, or DOCX file.';
         else if (values.resume.size > RESUME_MAX_BYTES) e.resume = 'Resume must be under 10 MB.';
+
+        if (!values.mlhCodeOfConduct) e.mlhCodeOfConduct = 'You must agree to the MLH Code of Conduct.';
+        if (!values.mlhDataSharing) e.mlhDataSharing = 'You must authorize sharing your information with MLH.';
 
         values.teammates.forEach((t, i) => {
             if (t.email && !EMAIL_RE.test(t.email)) {
@@ -265,6 +274,51 @@ export default function Register() {
                             🎮 Haven't joined our Discord yet? It's how we'll communicate with you throughout the
                             event: <a href="https://discord.gg/NwsWUB7Fp9" target="_blank" rel="noreferrer">join here</a>.
                         </p>
+                    </FormSection>
+
+                    <FormSection
+                        icon={<People style={{ width: '20pt' }} />}
+                        title="MLH Partnership"
+                        description="We are currently in the process of partnering with MLH. The following 3 checkboxes are for this partnership. If we do not end up partnering with MLH, your information will not be shared."
+                    >
+                        <CheckboxField
+                            id="mlhCodeOfConduct" required
+                            checked={values.mlhCodeOfConduct} onChange={toggle('mlhCodeOfConduct')}
+                            error={errors.mlhCodeOfConduct}
+                            label={<>
+                                I have read and agree to the{' '}
+                                <a href="https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md" target="_blank" rel="noreferrer">
+                                    MLH Code of Conduct
+                                </a>.
+                            </>}
+                        />
+                        <CheckboxField
+                            id="mlhDataSharing" required
+                            checked={values.mlhDataSharing} onChange={toggle('mlhDataSharing')}
+                            error={errors.mlhDataSharing}
+                            label={<>
+                                I authorize you to share my application/registration information with Major League
+                                Hacking for event administration, ranking, and administration (including the creation
+                                of linked accounts on MLH and DEV (dev.to)) in line with the{' '}
+                                <a href="https://github.com/MLH/mlh-policies/blob/main/privacy-policy.md" target="_blank" rel="noreferrer">
+                                    MLH Privacy Policy
+                                </a>. I further agree to the terms of both the{' '}
+                                <a href="https://github.com/MLH/mlh-policies/blob/main/contest-terms.md" target="_blank" rel="noreferrer">
+                                    MLH Contest Terms and Conditions
+                                </a>{' '}and the{' '}
+                                <a href="https://github.com/MLH/mlh-policies/blob/main/privacy-policy.md" target="_blank" rel="noreferrer">
+                                    MLH Privacy Policy
+                                </a>.
+                            </>}
+                        />
+                        <CheckboxField
+                            id="mlhMarketing"
+                            checked={values.mlhMarketing} onChange={toggle('mlhMarketing')}
+                            label={<>
+                                I authorize MLH + DEV to send me occasional emails about relevant events, career
+                                opportunities, and community announcements.
+                            </>}
+                        />
                     </FormSection>
 
                     {status === 'error' && (

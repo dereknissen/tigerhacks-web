@@ -88,6 +88,27 @@ export function FileField({ label, required, hint, error, accept, fileName, id, 
     );
 }
 
+export function CheckboxField({ id, label, required, error, checked, onChange }) {
+    return (
+        <div className={`field field-checkbox ${error ? 'field-invalid' : ''}`}>
+            <label className="checkbox-row" htmlFor={id}>
+                <input
+                    id={id}
+                    type="checkbox"
+                    className="ac-checkbox"
+                    checked={checked}
+                    onChange={onChange}
+                />
+                <span className="checkbox-label">
+                    {label}
+                    {required && <span className="field-required">*</span>}
+                </span>
+            </label>
+            {error && <span className="field-error">{error}</span>}
+        </div>
+    );
+}
+
 export function ChipGroup({ label, required, hint, error, name, options, value, onChange }) {
     return (
         <div className={`field ${error ? 'field-invalid' : ''}`}>

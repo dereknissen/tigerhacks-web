@@ -143,6 +143,45 @@
     border-color: var(--ac-red-dark);
 }
 
+/* ---------- checkbox field ---------- */
+
+.field-checkbox {
+    margin-bottom: 14pt;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10pt;
+    cursor: pointer;
+}
+
+.ac-checkbox {
+    flex-shrink: 0;
+    width: 17pt;
+    height: 17pt;
+    margin: 1pt 0 0;
+    accent-color: var(--ac-leaf);
+    cursor: pointer;
+}
+
+.checkbox-label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 10.5pt;
+    line-height: 1.5;
+    color: var(--ac-text);
+}
+
+.checkbox-label a {
+    color: var(--ac-leaf);
+    text-decoration: underline;
+}
+
+.field-checkbox.field-invalid .checkbox-label {
+    color: var(--ac-red-dark);
+}
+
 /* ---------- chip radio group ---------- */
 
 .chip-group {

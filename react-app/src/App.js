@@ -12,6 +12,7 @@ import ComingSoon from './pages/ComingSoon/ComingSoon';
 import Landing from './pages/Landing/Landing';
 import Register from './pages/Register/Register';
 import NotFound from './pages/404/404';
+import MlhBadge from './components/MlhBadge/MlhBadge';
 
 import ClickSound from './assets/sounds/click.mp3';
 
@@ -58,6 +59,7 @@ export default function App() {
 
   return (
     <div className="App">
+      <MlhBadge />
       <WindowWidthContext.Provider value={windowWidth}>
       <ThemeContext.Provider value={{ isDark, setIsDark }}>
          <BrowserRouter>

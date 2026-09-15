@@ -6,10 +6,13 @@ const crypto = require('crypto');
 admin.initializeApp();
 
 const SPREADSHEET_ID = '1fiRoEDP-qgW0xuKK9Ij9tyou4ZFpmUvWzBgYcg9e9y8';
-const SHEET_RANGE = 'A:X';
+// Columns Y:AB (firstName, lastName, age, phone) were appended after the
+// original A:X layout was already live with recorded rows, rather than
+// inserting them in place, so existing rows stay aligned with their columns.
+const SHEET_RANGE = 'A:AB';
 
 const REQUIRED_FIELDS = [
-    'fullName', 'email', 'school', 'year', 'major', 'discord',
+    'firstName', 'lastName', 'email', 'phone', 'age', 'school', 'levelOfStudy', 'major', 'discord',
     'judgingCategory', 'shirtSize', 'heardAbout', 'country',
 ];
 
@@ -71,12 +74,14 @@ async function appendRegistrationRow(values, resumeUrl) {
     const teammates = Array.isArray(values.teammates) ? values.teammates : [];
     const teammate = (i) => teammates[i] || {};
 
+    const fullName = `${values.firstName} ${values.lastName}`.trim();
+
     const row = [
         new Date().toISOString(),
-        values.fullName,
+        fullName,
         values.email,
         values.school,
-        values.year,
+        values.levelOfStudy,
         values.major,
         values.discord,
         teammate(0).name || '',
@@ -96,6 +101,10 @@ async function appendRegistrationRow(values, resumeUrl) {
         values.mlhCodeOfConduct ? 'Yes' : 'No',
         values.mlhDataSharing ? 'Yes' : 'No',
         values.mlhMarketing ? 'Yes' : 'No',
+        values.firstName,
+        values.lastName,
+        values.age,
+        values.phone,
     ];
 
     await sheets.spreadsheets.values.append({
@@ -133,7 +142,7 @@ exports.submitRegistration = onRequest(
         }
 
         try {
-            const resumeUrl = await uploadResume(resume, values.fullName);
+            const resumeUrl = await uploadResume(resume, `${values.firstName} ${values.lastName}`);
             await appendRegistrationRow(values, resumeUrl);
             res.status(200).json({ success: true });
         } catch (err) {

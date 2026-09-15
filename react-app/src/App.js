@@ -1,6 +1,6 @@
 /* React Imports */
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { createContext, useState, useEffect } from 'react';
+import { createContext, lazy, Suspense, useState, useEffect } from 'react';
 
 /* Styles */
 import './styles/fonts.css';
@@ -10,11 +10,14 @@ import './styles/main.css';
 /* Pages */
 import ComingSoon from './pages/ComingSoon/ComingSoon';
 import Landing from './pages/Landing/Landing';
-import Register from './pages/Register/Register';
 import NotFound from './pages/404/404';
 import MlhBadge from './components/MlhBadge/MlhBadge';
 
 import ClickSound from './assets/sounds/click.mp3';
+
+// Lazy-loaded so the ~13k-entry MLH school list it pulls in only ships to
+// visitors who actually open the registration page, not the landing page.
+const Register = lazy(() => import('./pages/Register/Register'));
 
 export const WindowWidthContext = createContext();
 export const ThemeContext = createContext();
@@ -65,7 +68,7 @@ export default function App() {
          <BrowserRouter>
         <Routes>
           <Route path = "/" element = {<Landing />} />
-          <Route path = "/register" element = {<Register />} />
+          <Route path = "/register" element = {<Suspense fallback={null}><Register /></Suspense>} />
           <Route path = "/coming-soon" element = {<ComingSoon />} />
           <Route path = "*" element={<NotFound />} />
         </Routes>

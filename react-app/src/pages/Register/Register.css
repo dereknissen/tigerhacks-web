@@ -9,6 +9,12 @@
     align-items: start;
 }
 
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10pt;
+}
+
 .teammate-remove {
     margin-top: 26pt;
     width: 30pt;
@@ -86,6 +92,10 @@
 @media (max-width: 700px) {
     .teammate-row {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .field-row {
+        grid-template-columns: 1fr;
     }
 
     .teammate-remove {

@@ -3,12 +3,29 @@ import './Register.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
-import { FormSection, TextField, TextAreaField, SelectField, ChipGroup, FileField, CheckboxField } from '../../components/Form/Fields';
+import { FormSection, TextField, TextAreaField, SelectField, AutocompleteField, ChipGroup, FileField, CheckboxField } from '../../components/Form/Fields';
 import { PawPrint, Bell, Leaf, Compass, Heart, People } from '../../components/Icons/Icons';
 import { COUNTRIES } from '../../config/countries';
+import { SCHOOLS } from '../../config/schools';
 import { submitRegistration } from '../../config/registration';
 
-const YEAR_OPTIONS = ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Other'];
+const LEVEL_OF_STUDY_OPTIONS = [
+    'Less than Secondary / High School',
+    'Secondary / High School',
+    'Undergraduate University (2 year - community college or similar)',
+    'Undergraduate University (3+ year)',
+    'Graduate University (Masters, Professional, Doctoral, etc)',
+    'Code School / Bootcamp',
+    'Other Vocational / Trade Program or Apprenticeship',
+    'Post Doctorate',
+    'Other',
+    "I'm not currently a student",
+    'Prefer not to answer',
+];
+const UNDERGRAD_LEVELS_OF_STUDY = [
+    'Undergraduate University (2 year - community college or similar)',
+    'Undergraduate University (3+ year)',
+];
 const SHIRT_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 const HEARD_ABOUT_OPTIONS = [
     'Instagram', 'Discord', 'Friend or Classmate', 'Professor or Class Announcement',
@@ -16,6 +33,10 @@ const HEARD_ABOUT_OPTIONS = [
 ];
 const MAX_TEAMMATES = 3;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^[+]?[\d\s().-]{7,20}$/;
+const MIN_AGE = 13;
+const MAX_AGE = 100;
+const SCHOOL_SET = new Set(SCHOOLS);
 const RESUME_EXT_RE = /\.(pdf|doc|docx)$/i;
 const RESUME_MAX_BYTES = 10 * 1024 * 1024;
 const RESUME_ACCEPT = [
@@ -26,7 +47,8 @@ const RESUME_ACCEPT = [
 ].join(',');
 
 const emptyValues = {
-    fullName: '', email: '', school: '', year: '', major: '', discord: '',
+    firstName: '', lastName: '', email: '', phone: '', age: '',
+    school: '', levelOfStudy: '', major: '', discord: '',
     teammates: [],
     judgingCategory: '', shirtSize: '', dietary: '',
     heardAbout: '', heardAboutOther: '', linkedin: '', country: '',
@@ -72,11 +94,19 @@ export default function Register() {
 
     const validate = () => {
         const e = {};
-        if (!values.fullName.trim()) e.fullName = 'Please enter your name.';
+        if (!values.firstName.trim()) e.firstName = 'Please enter your first name.';
+        if (!values.lastName.trim()) e.lastName = 'Please enter your last name.';
         if (!values.email.trim()) e.email = 'Please enter your email.';
         else if (!EMAIL_RE.test(values.email)) e.email = 'That email doesn\'t look right.';
-        if (!values.school.trim()) e.school = 'Please enter your school.';
-        if (!values.year) e.year = 'Please select your year.';
+        if (!values.phone.trim()) e.phone = 'Please enter your phone number.';
+        else if (!PHONE_RE.test(values.phone)) e.phone = 'That phone number doesn\'t look right.';
+        if (!values.age) e.age = 'Please enter your age.';
+        else if (!Number.isInteger(Number(values.age)) || values.age < MIN_AGE || values.age > MAX_AGE) {
+            e.age = `Age must be a number between ${MIN_AGE} and ${MAX_AGE}.`;
+        }
+        if (!values.school.trim()) e.school = 'Please select your school.';
+        else if (!SCHOOL_SET.has(values.school)) e.school = 'Please pick your school from the list.';
+        if (!values.levelOfStudy) e.levelOfStudy = 'Please select your level of study.';
         if (!values.major.trim()) e.major = 'Please enter your major.';
         if (!values.discord.trim()) e.discord = 'Please enter your Discord username.';
         if (!values.judgingCategory) e.judgingCategory = 'Please pick a judging category.';
@@ -156,25 +186,48 @@ export default function Register() {
 
                 <form onSubmit={handleSubmit} noValidate>
                     <FormSection icon={<PawPrint style={{ width: '20pt' }} />} title="Who are you?">
-                        <TextField
-                            id="fullName" label="Full Name" required
-                            value={values.fullName} onChange={set('fullName')} error={errors.fullName}
-                        />
+                        <div className="field-row">
+                            <TextField
+                                id="firstName" label="First Name" required
+                                value={values.firstName} onChange={set('firstName')} error={errors.firstName}
+                            />
+                            <TextField
+                                id="lastName" label="Last Name" required
+                                value={values.lastName} onChange={set('lastName')} error={errors.lastName}
+                            />
+                        </div>
                         <TextField
                             id="email" label="Email" type="email" required
                             hint="We'll send your confirmation and event updates here"
                             value={values.email} onChange={set('email')} error={errors.email}
                         />
-                        <TextField
+                        <div className="field-row">
+                            <TextField
+                                id="phone" label="Phone Number" type="tel" required
+                                placeholder="(555) 123-4567"
+                                value={values.phone} onChange={set('phone')} error={errors.phone}
+                            />
+                            <TextField
+                                id="age" label="Age" type="number" required
+                                min={MIN_AGE} max={MAX_AGE}
+                                value={values.age} onChange={set('age')} error={errors.age}
+                            />
+                        </div>
+                        <AutocompleteField
                             id="school" label="School" required
-                            value={values.school} onChange={set('school')} error={errors.school}
+                            options={SCHOOLS} placeholder="Start typing your school's name..."
+                            hint="Pick from MLH's verified school list so we get uniform data"
+                            value={values.school}
+                            onChange={(v) => setValues((s) => ({ ...s, school: v }))}
+                            error={errors.school}
                         />
-                        <ChipGroup
-                            label="Year in School" required name="year" options={YEAR_OPTIONS}
-                            value={values.year} onChange={(v) => setValues((s) => ({ ...s, year: v }))}
-                            error={errors.year}
+                        <SelectField
+                            id="levelOfStudy" label="Level of Study" required
+                            options={LEVEL_OF_STUDY_OPTIONS}
+                            value={values.levelOfStudy} onChange={set('levelOfStudy')}
+                            error={errors.levelOfStudy}
                         />
-                        {values.year === 'Other' && (
+                        {values.levelOfStudy && !UNDERGRAD_LEVELS_OF_STUDY.includes(values.levelOfStudy) && (
                             <div className="field-warning">
                                 Heads up, TigerHacks is open to undergraduate students. If that's not you, reach
                                 out to us before registering so we can help figure out if you're still eligible.

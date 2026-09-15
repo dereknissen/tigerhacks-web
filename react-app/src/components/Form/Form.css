@@ -89,6 +89,70 @@
     border-color: var(--ac-red-dark);
 }
 
+/* ---------- combobox / autocomplete field ---------- */
+
+.ac-combobox {
+    position: relative;
+}
+
+.ac-combobox-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4pt;
+    padding: 6pt;
+    list-style: none;
+    background: var(--ac-paper);
+    border: 1.5px solid var(--ac-cream-dark);
+    border-radius: 12pt;
+    box-shadow: 0 8pt 24pt var(--ac-shadow-soft);
+    max-height: 260pt;
+    overflow-y: auto;
+    z-index: 20;
+}
+
+.ac-combobox-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8pt 10pt;
+    border: none;
+    border-radius: 8pt;
+    background: none;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 10.5pt;
+    color: var(--ac-text);
+    cursor: pointer;
+}
+
+.ac-combobox-option-highlighted,
+.ac-combobox-option:hover {
+    background: var(--ac-cream-dark);
+}
+
+.ac-combobox-empty {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4pt;
+    padding: 10pt 14pt;
+    background: var(--ac-paper);
+    border: 1.5px solid var(--ac-cream-dark);
+    border-radius: 12pt;
+    box-shadow: 0 8pt 24pt var(--ac-shadow-soft);
+    font-size: 9.5pt;
+    color: var(--ac-text-soft);
+    z-index: 20;
+}
+
+.ac-combobox-empty a {
+    color: var(--ac-leaf);
+    text-decoration: underline;
+}
+
 /* ---------- file field ---------- */
 
 .ac-file {

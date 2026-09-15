@@ -9,6 +9,7 @@ import Countdown from '../../components/Countdown/Countdown';
 import About from '../../components/About/About';
 import Gallery from '../../components/Gallery/Gallery';
 import Tracks from '../../components/Tracks/Tracks';
+import Sponsors from '../../components/Sponsors/Sponsors';
 import Leadership from '../../components/Leadership/Leadership';
 import FAQ from '../../components/FAQ/FAQ';
 import Footer from '../../components/Footer/Footer';
@@ -144,6 +145,7 @@ export default function Landing() {
             <About />
             <Gallery />
             <Tracks />
+            <Sponsors />
             <Leadership />
             <FAQ />
             <Footer />

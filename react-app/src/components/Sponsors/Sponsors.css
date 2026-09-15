@@ -26,6 +26,17 @@
     color: var(--ac-text-soft);
     font-size: 10pt;
     border-style: dashed;
+    padding: 14pt;
+}
+
+.sponsor-frame-filled {
+    border-style: none;
+}
+
+.sponsor-logo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 .sponsor-frame-lg {
@@ -43,23 +54,6 @@
     width: 150pt;
     height: 64pt;
     font-size: 9pt;
-}
-
-.sponsor-cta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14pt;
-    padding: 30pt 24pt;
-    text-align: center;
-}
-
-.sponsor-cta-text {
-    color: var(--ac-text-on-dark);
-    font-family: var(--font-heading);
-    font-size: 14pt;
-    max-width: 480pt;
-    margin: 0;
 }
 
 @media (max-width: 600px) {

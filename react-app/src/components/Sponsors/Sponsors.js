@@ -3,10 +3,26 @@ import SectionHeading from '../SectionHeading/SectionHeading';
 import { Bell } from '../Icons/Icons';
 import Reveal from '../Reveal/Reveal';
 
+import ShelterLogo from '../../assets/sponsors/shelter.jpeg';
+import ReplyLogo from '../../assets/sponsors/reply.webp';
+import HrBlockLogo from '../../assets/sponsors/hrblock.png';
+
 const TIERS = [
-    { name: 'Presenting Sponsor', slots: 1, size: 'lg' },
-    { name: 'Gold Sponsors', slots: 3, size: 'md' },
-    { name: 'Silver Sponsors', slots: 4, size: 'sm' },
+    {
+        name: 'Silver Sponsors',
+        size: 'md',
+        sponsors: [
+            { name: 'Shelter Insurance', logo: ShelterLogo, scale: 1.35 },
+            { name: 'HR Block', logo: HrBlockLogo },
+        ],
+    },
+    {
+        name: 'Bronze Sponsors',
+        size: 'sm',
+        sponsors: [
+            { name: 'Reply', logo: ReplyLogo },
+        ],
+    },
 ];
 
 export default function Sponsors() {
@@ -24,24 +40,24 @@ export default function Sponsors() {
                     <div key={tier.name} className="sponsor-tier">
                         <p className="sponsor-tier-name">{tier.name}</p>
                         <div className="sponsor-row">
-                            {Array.from({ length: tier.slots }).map((_, i) => (
+                            {tier.sponsors.map((sponsor, i) => (
                                 <Reveal
-                                    key={i}
+                                    key={sponsor.name}
                                     delay={i * 0.06}
-                                    className={`sponsor-frame sponsor-frame-${tier.size} paper-card`}
+                                    className={`sponsor-frame sponsor-frame-${tier.size} sponsor-frame-filled paper-card`}
                                 >
-                                    <span>Your Logo Here</span>
+                                    <img
+                                        src={sponsor.logo}
+                                        alt={sponsor.name}
+                                        className="sponsor-logo"
+                                        style={sponsor.scale ? { transform: `scale(${sponsor.scale})` } : undefined}
+                                    />
                                 </Reveal>
                             ))}
                         </div>
                     </div>
                 ))}
             </div>
-
-            <Reveal className="sponsor-cta wood-panel">
-                <p className="sponsor-cta-text">Want to sponsor TigerHacks 2026 and meet hundreds of student hackers?</p>
-                <a className="btn btn-outline" href="mailto:tigerhacks@missouri.edu">Become a Sponsor</a>
-            </Reveal>
         </section>
     );
 }

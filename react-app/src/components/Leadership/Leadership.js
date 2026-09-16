@@ -13,6 +13,7 @@ import KrishnaPhoto from '../../assets/portraits/krishna.png';
 import SydneyPhoto from '../../assets/portraits/sydney.png';
 import TsinatPhoto from '../../assets/portraits/tsinat.jpeg';
 import MickyPhoto from '../../assets/portraits/micky.jpeg';
+import JackPhoto from '../../assets/portraits/jeveker.jpg';
 
 const AVATAR_COLORS = ['#FAC3B4', '#D1D1FF', '#ADADEF', '#F2977E', '#7373D9', '#E2574C'];
 
@@ -26,7 +27,7 @@ const LEADERS = [
     { name: 'Katelyn Van Dyke', role: 'HackerX', photo: KatelynPhoto },
     { name: 'Krishna Karra', role: 'HackerX', photo: KrishnaPhoto },
     { name: 'Sydney Belter', role: 'Marketing', photo: SydneyPhoto },
-    { name: 'Jack Eveker', role: 'Marketing' },
+    { name: 'Jack Eveker', role: 'Marketing', photo: JackPhoto },
     { name: 'Tsinat Mitiku', role: 'Logistics', photo: TsinatPhoto },
     { name: 'Micky Sheridan', role: 'Logistics', photo: MickyPhoto },
 ];

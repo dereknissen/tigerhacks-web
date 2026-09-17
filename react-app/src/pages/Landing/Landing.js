@@ -9,6 +9,8 @@ import Countdown from '../../components/Countdown/Countdown';
 import About from '../../components/About/About';
 import Gallery from '../../components/Gallery/Gallery';
 import Tracks from '../../components/Tracks/Tracks';
+import Rubric from '../../components/Rubric/Rubric';
+import Schedule from '../../components/Schedule/Schedule';
 import Sponsors from '../../components/Sponsors/Sponsors';
 import Leadership from '../../components/Leadership/Leadership';
 import FAQ from '../../components/FAQ/FAQ';
@@ -145,6 +147,8 @@ export default function Landing() {
             <About />
             <Gallery />
             <Tracks />
+            <Rubric />
+            <Schedule />
             <Sponsors />
             <Leadership />
             <FAQ />

@@ -1,0 +1,270 @@
+.schedule-banner {
+    max-width: 560pt;
+    margin: 0 auto 28pt;
+    padding: 12pt 22pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10pt;
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 12pt;
+    color: var(--ac-text);
+}
+
+@keyframes schedulePulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.25); opacity: .7; }
+}
+
+.schedule-banner-pulse {
+    width: 14pt;
+    flex-shrink: 0;
+    animation: schedulePulse 1.4s ease-in-out infinite;
+}
+
+.schedule-week {
+    max-width: 980pt;
+    margin: 0 auto;
+    padding: 22pt 22pt 26pt;
+}
+
+.schedule-week-scroll {
+    /* Horizontal-only: per spec, overflow-x: auto with no explicit
+       overflow-y computes overflow-y to auto as well (and "visible"
+       doesn't opt back out — same rule promotes it right back), which was
+       opening a second, vertical scrollbar inside the calendar. Pin it to
+       hidden so only the page itself scrolls vertically, never this box —
+       there's no vertical content to clip since the grid's height is set
+       to fit exactly.  */
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.schedule-week-header {
+    display: flex;
+    min-width: 620pt;
+}
+
+.schedule-week-gutter-spacer {
+    width: 52pt;
+    flex-shrink: 0;
+}
+
+.schedule-week-day-label {
+    flex: 1 1 0;
+    min-width: 160pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7pt;
+    padding: 6pt 6pt 14pt;
+    font-family: var(--font-heading);
+    font-size: 13pt;
+    color: var(--ac-text);
+}
+
+.schedule-week-day-label-today {
+    color: var(--ac-red);
+}
+
+.schedule-tab-date {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 9.5pt;
+    opacity: .75;
+}
+
+.schedule-tab-dot {
+    width: 7pt;
+    height: 7pt;
+    border-radius: 100pt;
+    background: var(--ac-red);
+    animation: schedulePulse 1.4s ease-in-out infinite;
+}
+
+.schedule-week-body {
+    display: flex;
+    position: relative;
+    min-width: 620pt;
+}
+
+.schedule-gutter {
+    position: sticky;
+    left: 0;
+    width: 52pt;
+    flex-shrink: 0;
+    background: var(--ac-paper);
+    z-index: 4;
+}
+
+.schedule-hour-label {
+    position: absolute;
+    left: 0;
+    width: 46pt;
+    transform: translateY(-50%);
+    font-family: var(--font-heading);
+    font-size: 8pt;
+    color: var(--ac-text-soft);
+    text-align: right;
+}
+
+.schedule-week-column {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 160pt;
+    border-left: 1.5pt solid var(--ac-cream-dark);
+}
+
+.schedule-hour-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 0;
+    border-top: 1pt dashed var(--ac-cream-dark);
+}
+
+.schedule-event {
+    position: absolute;
+    left: 6pt;
+    right: 6pt;
+    display: flex;
+    flex-direction: column;
+    gap: 1pt;
+    padding: 4pt 9pt;
+    border-radius: 9pt;
+    border-left: 4pt solid var(--event-border, var(--ac-wood-dark));
+    background: var(--event-bg, var(--ac-cream-dark));
+    overflow: hidden;
+    transition: opacity .2s ease;
+}
+
+.schedule-event-meal {
+    --event-border: var(--ac-wood);
+    --event-bg: color-mix(in srgb, var(--ac-wood) 20%, var(--ac-paper));
+}
+
+.schedule-event-headline {
+    --event-border: var(--ac-red);
+    --event-bg: color-mix(in srgb, var(--ac-red) 16%, var(--ac-paper));
+}
+
+.schedule-event-onboarding {
+    --event-border: var(--ac-blue-dark);
+    --event-bg: color-mix(in srgb, var(--ac-blue) 45%, var(--ac-paper));
+}
+
+.schedule-event-community {
+    --event-border: var(--ac-yellow-dark);
+    --event-bg: color-mix(in srgb, var(--ac-yellow) 45%, var(--ac-paper));
+}
+
+.schedule-event-past {
+    opacity: .45;
+}
+
+.schedule-event-live {
+    box-shadow: 0 0 0 2pt var(--ac-red), 0 4pt 18pt var(--ac-shadow-soft);
+    z-index: 2;
+}
+
+.schedule-event-time {
+    font-family: var(--font-heading);
+    font-size: 8.5pt;
+    color: var(--ac-text-soft);
+    text-align: left;
+}
+
+.schedule-event-title {
+    font-family: var(--font-heading);
+    font-size: 11.5pt;
+    color: var(--ac-text);
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.schedule-event-location {
+    font-size: 9pt;
+    color: var(--ac-text-soft);
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.schedule-event-badge {
+    position: absolute;
+    top: 6pt;
+    right: 10pt;
+    font-family: var(--font-heading);
+    font-size: 7.5pt;
+    font-weight: 600;
+    letter-spacing: .03em;
+    padding: 3pt 9pt;
+    border-radius: 100pt;
+    text-transform: uppercase;
+}
+
+.schedule-event-badge-live {
+    background: var(--ac-red);
+    color: var(--ac-text-on-dark);
+}
+
+.schedule-event-badge-next {
+    background: var(--ac-paper);
+    color: var(--ac-text);
+    box-shadow: 0 2pt 6pt var(--ac-shadow-soft);
+}
+
+.schedule-now-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2pt;
+    background: var(--ac-red);
+    z-index: 3;
+}
+
+.schedule-now-dot {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 8pt;
+    height: 8pt;
+    border-radius: 100pt;
+    background: var(--ac-red);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .schedule-banner-pulse,
+    .schedule-tab-dot {
+        animation: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .schedule-week {
+        padding: 18pt 14pt 20pt;
+    }
+
+    .schedule-week-header,
+    .schedule-week-body {
+        min-width: 560pt;
+    }
+
+    .schedule-week-day-label {
+        min-width: 150pt;
+        font-size: 11.5pt;
+    }
+
+    .schedule-week-column {
+        min-width: 150pt;
+    }
+
+    .schedule-event-title {
+        font-size: 10pt;
+    }
+}

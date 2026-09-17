@@ -1,0 +1,41 @@
+.rubric-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20pt;
+    max-width: 820pt;
+    margin: 0 auto;
+}
+
+.rubric-card {
+    padding: 22pt 24pt;
+    border-left: 8pt solid var(--rubric-color, var(--ac-wood-dark));
+    text-align: left;
+    transition: transform .2s ease;
+}
+
+.rubric-card:hover {
+    transform: translateY(-6pt) rotate(-.4deg);
+}
+
+.rubric-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 11pt;
+    color: var(--rubric-color, var(--ac-wood-dark));
+    margin-bottom: 4pt;
+}
+
+.rubric-name {
+    font-size: 14pt;
+    margin-bottom: 8pt;
+}
+
+.rubric-desc {
+    font-size: 10.5pt;
+}
+
+@media (max-width: 700px) {
+    .rubric-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -6,6 +6,7 @@ import Reveal from '../Reveal/Reveal';
 import ShelterLogo from '../../assets/sponsors/shelter.jpeg';
 import ReplyLogo from '../../assets/sponsors/reply.webp';
 import HrBlockLogo from '../../assets/sponsors/hrblock.png';
+import VeteransUnitedLogo from '../../assets/sponsors/veterans-united.jpg';
 
 const TIERS = [
     {
@@ -21,6 +22,7 @@ const TIERS = [
         size: 'sm',
         sponsors: [
             { name: 'Reply', logo: ReplyLogo },
+            { name: 'Veterans United', logo: VeteransUnitedLogo },
         ],
     },
 ];

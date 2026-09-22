@@ -39,7 +39,6 @@ const RAW_DAYS = [
             { time: ct(9, 25, 19, 30), title: 'Dinner', location: 'Lafferre — Time Capsule Lounge', duration: 60 },
             { time: ct(9, 25, 20, 30), title: 'Team Building', location: 'Lafferre — Ketcham Auditorium', duration: 60 },
             { time: ct(9, 25, 21, 30), title: 'Beginner Orientation', location: 'Lafferre — Ketcham Auditorium', duration: 60 },
-            { time: ct(9, 25, 22, 30), title: 'Air Mattress Handouts', location: 'Lafferre — Main Hallway', duration: 30 },
             { time: ct(9, 25, 23, 30), title: 'Event', location: 'TBD' },
         ],
     },

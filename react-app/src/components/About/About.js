@@ -8,7 +8,7 @@ import HealthBackground from '../../assets/theme/health-background.png';
 const STATS = [
     { value: '36', label: 'hours of hacking', icon: Clock, color: '#FAC3B4' },
     { value: '300+', label: 'hackers expected', icon: People, color: '#D1D1FF' },
-    { value: '$10k+', label: 'in prizes', icon: Trophy, color: '#E2574C' },
+    { value: '$7,400', label: 'in prizes', icon: Trophy, color: '#E2574C' },
     { value: '1', label: 'unforgettable weekend', icon: Sparkle, color: '#ADADEF' },
 ];
 
